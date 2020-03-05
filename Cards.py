@@ -88,23 +88,23 @@ def val_stack(stack):
 # Takes a stack and converts each card into a string of its value.
 def convert_to_english(stack):
     englishStack = []
+    valStack = val_stack(stack)
+    suitStack = suit_stack(stack)
     for i in range(len(stack)):
-        val = card_value(stack[i])
-        suit = card_suit(stack[i])
-        card = cardsVal[val] + cardsSuit[suit]
-        
+        card = cardsValEng[valStack[i]] + cardsSuitEng[suitStack[i]]
         englishStack.append(card)
+
     return englishStack
 
 # Takes a stack and converts each card into a simple representation (A♠)
 def convert_to_simple(stack):
     simpleStack = []
+    valStack = val_stack(stack)
+    suitStack = suit_stack(stack)
     for i in range(len(stack)):
-        val = card_value(stack[i])
-        suit = card_suit(stack[i])
-        card = cardsValSimple[val] + cardsSuitSimple[suit]
-        
+        card = cardsValSimple[valStack[i]] + cardsSuitSimple[suitStack[i]]
         simpleStack.append(card)
+
     return simpleStack
 
 ########################################################
@@ -309,10 +309,10 @@ def test_compare_hands(deck, trials):
     
 ########################################
 # Card dictionaries
-cardsVal = {0: "Ace of ", 1: "Two of ", 2: "Three of ", 3: "Four of ", 4: "Five of ",
+cardsValEng = {0: "Ace of ", 1: "Two of ", 2: "Three of ", 3: "Four of ", 4: "Five of ",
             5: "Six of ", 6: "Seven of ", 7: "Eight of ", 8: "Nine of ", 9: "Ten of ",
             10: "Jack of ", 11: "Queen of ", 12: "King of ", }
-cardsSuit = {0: "Spades", 1: "Hearts", 2: "Clubs", 3: "Diamonds"}
+cardsSuitEng = {0: "Spades", 1: "Hearts", 2: "Clubs", 3: "Diamonds"}
  
 cardsValSimple = {0: "A", 1: "2", 2: "3", 3: "4", 4: "5", 5: "6", 6: "7", 7: "8", 8: "9", 9: "10", 10: "J", 11: "Q", 12: "K", }
 cardsSuitSimple = {0: "♠", 1: "♥", 2: "♣", 3: "♦"}
