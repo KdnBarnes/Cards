@@ -19,7 +19,8 @@ def create_deck(shuffled): # Create and return a fresh deck.
         random.shuffle(newDeck)
     return newDeck
 
-# Take two stacks of cards, add the second to the first, then shuffle.
+# Take a variable number of stacks, shuffles them all into the first given stack,
+# then returns this new combined stack.
 def shuffle_deck(stack, *stacks):
     allStacks = flatten_list(list(stacks))
     for i in range(len(allStacks)):
@@ -109,8 +110,8 @@ def convert_to_simple(stack):
 ########################################################
 # Hand-evaluation functions
 
-# Evaluate what is assumed to be a 5-card hand for valid poker hands.
-# Doesn't return straight away - calculates everything and then returns
+# Evaluate a given stack for valid poker hands.
+# Doesn't return straight away - calculates everything and then returns - should be modified in the future to return immediately.
 def check_hand(stack):
     # Get the values and suits, and sort the values list for later.
     valList = val_stack(stack)
@@ -206,6 +207,7 @@ def high_card(stack):
     # Deals with aces. Since aces are value zero but in actuality the highest card,
     # we need to put them at the end of the list before we reverse it so they'll be
     # in the right place.
+    # Probably a better/simpler solution for this but I don't want to bother finding it ATM
     if len(valList) > 0:
         if valList[0] == 0:
             valList.append(valList[0])
@@ -235,7 +237,7 @@ def high_card(stack):
     return cardString
     
 
-# Simple function for testing 20 random hands.
+# Simple function for testing a certain number of hands
 def test_hands(deck, trials):
     handsList = [0,0,0,0,0,0,0,0,0,0]
     for i in range(trials):
@@ -278,6 +280,7 @@ def test_hands(deck, trials):
 def hand_value(stack):
     return pokerHandsStr[check_hand(stack)] + high_card(stack)
 
+# Compare the string value derived from hand_value() of two different hands to see which beats which.
 def compare_hands(stack1, stack2):
     hand1Val = hand_value(stack1)
     hand2Val = hand_value(stack2)
@@ -289,6 +292,7 @@ def compare_hands(stack1, stack2):
     else:
         print("What on Earth?! They're equal!")
 
+# Function for testing the compare_hands() function a given number of times.
 def test_compare_hands(deck, trials):
     for i in range(trials):
         hand1 = deal_hand(deck)
