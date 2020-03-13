@@ -40,10 +40,10 @@ def flatten_list(listList):
 
     return flatList
 
-# Take one stack of cards, deal the top 5 into a new list.
-def deal_hand(stack1):
+# Take one stack of cards, "deal" some into a new list (default 5).
+def deal_hand(stack1, num=5):
     stack2 = []
-    for i in range(5):
+    for i in range(num):
         stack2.append(stack1[0])
         stack1.remove(stack1[0])
     return stack2
@@ -332,10 +332,10 @@ pokerHighCardStr = { 0: "x", 1: "b", 2: "c", 3: "d", 4: "e", 5: "f", 6: "g", 7: 
 
 # main()
 def main():
-    deck = create_deck(True) # Create a shuffled deck
+	deck = create_deck(True) # Create a shuffled deck
 
-    # test_hands(deck, 20)
-    test_compare_hands(deck, 20)
-        
-    
-main()
+	#test_hands(deck, 20)
+	#test_compare_hands(deck, 20)
+
+if __name__ == '__main__':
+	main()
